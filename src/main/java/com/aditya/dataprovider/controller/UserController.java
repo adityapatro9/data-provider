@@ -2,6 +2,8 @@ package com.aditya.dataprovider.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,6 +22,8 @@ import com.aditya.dataprovider.service.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+	Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	UserService userService;
 	
@@ -33,6 +37,10 @@ public class UserController {
 	
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) Integer userId) {
+		logger.debug("This is a debug message");
+		logger.info("This is an info message");
+		logger.warn("This is a warn message");
+		logger.error("This is an error message");
 		return userService.getAllUsers(userId);
 	}
 	
