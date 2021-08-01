@@ -5,7 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,6 +49,22 @@ public class UserController {
 	@PostMapping("/addUser")
 	public ResponseEntity<User> addUser(@RequestBody() User user) {
 		return userService.addUser(user);
+	}
+	
+	@GetMapping("/getCurrentUser")
+	public ResponseEntity<String> getCurrentUser(Model model) {
+		String currentUserName = userService.getCurrentUser();
+		model.addAttribute("name", currentUserName);
+		if ( currentUserName.length() > 0 && currentUserName != "Error" )
+			return new ResponseEntity<>(currentUserName,HttpStatus.OK);
+		else 
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@GetMapping("/greeting")
+	public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+		model.addAttribute("name", name);
+		return "greeting";
 	}
 	
 	

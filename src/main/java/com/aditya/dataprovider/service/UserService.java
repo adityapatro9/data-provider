@@ -68,6 +68,21 @@ public class UserService {
 		}
 	}
 	
+	public String getCurrentUser() {
+		try {
+			List<User> users = new ArrayList<User>();
+			userRepository.findAll().forEach(users::add);
+			User user = new User(1,fname,lname,profession,phone,email);
+			if ( users.contains(user) ) {
+				return fname;
+			} else {
+				return "Guest";
+			}
+		} catch(Exception e) {
+			return "Error";
+		}
+	}
+	
 	
 
 }
