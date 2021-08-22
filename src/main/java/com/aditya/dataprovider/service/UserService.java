@@ -83,6 +83,21 @@ public class UserService {
 		}
 	}
 	
+	public List<User> getAllRawUsers(Integer userId) {
+		
+			List<User> users = new ArrayList<User>();
+
+			if (userId == null)
+				userRepository.findAll().forEach(users::add);
+			else
+				userRepository.findByUserIdContaining(userId).forEach(users::add);
+
+			return users;
+
+	}
+	
+	
+	
 	
 
 }

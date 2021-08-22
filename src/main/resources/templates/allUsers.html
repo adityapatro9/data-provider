@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style>
+		table {
+			width: 100%;
+		}
+	
+		table,
+		th,
+		td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+	
+		th,
+		td {
+			padding: 15px;
+			text-align: left;
+		}
+	
+		#t01 tr:nth-child(even) {
+			background-color: #eee;
+		}
+	
+		#t01 tr:nth-child(odd) {
+			background-color: #fff;
+		}
+	
+		#t01 th {
+			background-color: black;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<table id="t01">
+		<thead>
+			<tr>
+				<th> ID </th>
+				<th> First Name </th>
+				<th> Last Name </th>
+				<th> Profession </th>
+				<th> Contact No </th>
+				<th> Email </th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${users}">
+				<td><span th:text="${user.userId}"> ID </span></td>
+				<td><span th:text="${user.firstName}"> First Name </span></td>
+				<td><span th:text="${user.lastName}"> Last Name </span></td>
+				<td><span th:text="${user.profession}"> Profession </span></td>
+				<td><span th:text="${user.contactNo}"> Contact No </span></td>
+				<td><span th:text="${user.emailId}"> Email </span></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

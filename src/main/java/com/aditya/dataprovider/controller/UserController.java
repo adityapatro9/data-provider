@@ -31,11 +31,7 @@ public class UserController {
 	
 	@Autowired
 	UserRepository userRepository;
-	
-//	@GetMapping("/details")
-//	public List<User> getUserDetails() {
-//		return userService.generateUser();
-//	}
+
 	
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) Integer userId) {
@@ -60,13 +56,6 @@ public class UserController {
 		else 
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	@GetMapping("/greeting")
-	public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-		model.addAttribute("name", name);
-		return "greeting";
-	}
-	
 	
 
 }
