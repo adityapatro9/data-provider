@@ -68,6 +68,36 @@ public class UserService {
 		}
 	}
 	
+	public String getCurrentUser() {
+		try {
+			List<User> users = new ArrayList<User>();
+			userRepository.findAll().forEach(users::add);
+			User user = new User(1,fname,lname,profession,phone,email);
+			if ( users.contains(user) ) {
+				return fname;
+			} else {
+				return "Guest";
+			}
+		} catch(Exception e) {
+			return "Error";
+		}
+	}
+	
+	public List<User> getAllRawUsers(Integer userId) {
+		
+			List<User> users = new ArrayList<User>();
+
+			if (userId == null)
+				userRepository.findAll().forEach(users::add);
+			else
+				userRepository.findByUserIdContaining(userId).forEach(users::add);
+
+			return users;
+
+	}
+	
+	
+	
 	
 
 }
