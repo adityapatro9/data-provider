@@ -1,17 +1,15 @@
 package com.aditya.dataprovider.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.aditya.dataprovider.model.User;
+import com.aditya.dataprovider.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.aditya.dataprovider.model.Tutorial;
-import com.aditya.dataprovider.model.User;
-import com.aditya.dataprovider.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UserService {
@@ -41,12 +39,12 @@ public class UserService {
 	
 	public ResponseEntity<List<User>> getAllUsers(Integer userId) {
 		try {
-			List<User> users = new ArrayList<User>();
+			List<User> users = new ArrayList<>();
 
 			if (userId == null)
-				userRepository.findAll().forEach(users::add);
+				users.addAll(userRepository.findAll());
 			else
-				userRepository.findByUserIdContaining(userId).forEach(users::add);
+				users.addAll(userRepository.findByUserIdContaining(userId));
 
 			if (users.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -70,8 +68,7 @@ public class UserService {
 	
 	public String getCurrentUser() {
 		try {
-			List<User> users = new ArrayList<User>();
-			userRepository.findAll().forEach(users::add);
+			List<User> users = new ArrayList<>(userRepository.findAll());
 			User user = new User(1,fname,lname,profession,phone,email);
 			if ( users.contains(user) ) {
 				return fname;
@@ -85,12 +82,12 @@ public class UserService {
 	
 	public List<User> getAllRawUsers(Integer userId) {
 		
-			List<User> users = new ArrayList<User>();
+			List<User> users = new ArrayList<>();
 
 			if (userId == null)
-				userRepository.findAll().forEach(users::add);
+				users.addAll(userRepository.findAll());
 			else
-				userRepository.findByUserIdContaining(userId).forEach(users::add);
+				users.addAll(userRepository.findByUserIdContaining(userId));
 
 			return users;
 

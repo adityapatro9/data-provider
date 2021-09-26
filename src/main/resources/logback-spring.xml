@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOGS" value="D:/logs" />
+    <property name="LOGS" value="C:/Users/Arati/Documents/workspace-spring-tool-suite-4-4.11.1.RELEASE/logs" />
 
     <appender name="Console"
         class="ch.qos.logback.core.ConsoleAppender">

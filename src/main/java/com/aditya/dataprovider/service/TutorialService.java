@@ -1,15 +1,15 @@
 package com.aditya.dataprovider.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.aditya.dataprovider.model.Tutorial;
+import com.aditya.dataprovider.repository.TutorialRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
-import com.aditya.dataprovider.model.Tutorial;
-import com.aditya.dataprovider.repository.TutorialRepository;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class TutorialService {
@@ -23,12 +23,12 @@ public class TutorialService {
 		
 		logger.debug("Inside TutorialService raw method");
 
-		List<Tutorial> tutorials = new ArrayList<Tutorial>();
+		List<Tutorial> tutorials = new ArrayList<>();
 
-		if (title == null || title.isEmpty())
-			tutorialRepository.findAll().forEach(tutorials::add);
+		if (ObjectUtils.isEmpty(title))
+			tutorials.addAll(tutorialRepository.findAll());
 		else
-			tutorialRepository.findByTitleContaining(title).forEach(tutorials::add);
+			tutorials.addAll(tutorialRepository.findByTitleContaining(title));
 
 		return tutorials;
 

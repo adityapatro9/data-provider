@@ -1,8 +1,9 @@
 package com.aditya.dataprovider.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.aditya.dataprovider.model.Tutorial;
+import com.aditya.dataprovider.model.User;
+import com.aditya.dataprovider.service.TutorialService;
+import com.aditya.dataprovider.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.aditya.dataprovider.model.Tutorial;
-import com.aditya.dataprovider.model.User;
-import com.aditya.dataprovider.service.TutorialService;
-import com.aditya.dataprovider.service.UserService;
+import java.util.List;
 
 @Controller
 public class ThymeleafController {
@@ -47,8 +45,7 @@ public class ThymeleafController {
 	
 	@GetMapping("/allUsers")
 	public String showAllUsers(Model model) {
-		List<User> users = new ArrayList<>();
-		users = userService.getAllRawUsers(null);
+		List<User> users = userService.getAllRawUsers(null);
 		model.addAttribute("users", users);
 		logger.info("Entered all users!!!");
 		return "allUsers";
@@ -56,8 +53,7 @@ public class ThymeleafController {
 	
 	@GetMapping("/allTutorials")
 	public String showAllTutorials(Model model) {
-		List<Tutorial> tutorials = new ArrayList<>();
-		tutorials = tutorialService.getAllRawTutorials("");
+		List<Tutorial> tutorials = tutorialService.getAllRawTutorials("");
 		model.addAttribute("tutorials", tutorials);
 		logger.info("Entered all Tutorials!!!");
 		return "allTutorials";

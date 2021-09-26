@@ -1,14 +1,13 @@
 package com.aditya.dataprovider.controller;
 
-import java.util.Calendar;
-import java.util.List;
-
+import com.aditya.dataprovider.model.User;
+import com.aditya.dataprovider.repository.UserRepository;
+import com.aditya.dataprovider.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aditya.dataprovider.model.User;
-import com.aditya.dataprovider.repository.UserRepository;
-import com.aditya.dataprovider.service.UserService;
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -53,7 +50,7 @@ public class UserController {
 	public ResponseEntity<String> getCurrentUser(Model model) {
 		String currentUserName = userService.getCurrentUser();
 		model.addAttribute("name", currentUserName);
-		if ( currentUserName.length() > 0 && currentUserName != "Error" )
+		if ( currentUserName.length() > 0 && !"Error".equals(currentUserName))
 			return new ResponseEntity<>(currentUserName,HttpStatus.OK);
 		else 
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
