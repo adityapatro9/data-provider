@@ -96,6 +96,10 @@ public class UserService {
 
 	}
 	
+	public List<User> getUserByContactNumber(String contactNo) {
+		return userRepository.findByContactNumber(contactNo);
+	}
+	
 	
 	
 	
