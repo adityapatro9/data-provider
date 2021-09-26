@@ -1,8 +1,9 @@
 package com.aditya.dataprovider.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.aditya.dataprovider.model.Tutorial;
+import com.aditya.dataprovider.model.User;
+import com.aditya.dataprovider.service.TutorialService;
+import com.aditya.dataprovider.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.aditya.dataprovider.model.Tutorial;
-import com.aditya.dataprovider.model.User;
-import com.aditya.dataprovider.service.TutorialService;
-import com.aditya.dataprovider.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ThymeleafController {
@@ -64,4 +63,18 @@ public class ThymeleafController {
 		
 	}
 
+	@GetMapping("/searchUser")
+	public String getUserByContactNumber(@RequestParam(name="contactNo")String contactNo, Model model) {
+		List<User> user = userService.getUserByContactNumber(contactNo);
+		model.addAttribute("users", user);
+		logger.info("Entered searchUser!!!");
+		return "searchUserResult";
+	}
+
+	@GetMapping("/showSearchUserForm")
+	public String showSearchUserForm(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "searchUser";
+	}
 }
