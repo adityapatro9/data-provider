@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Getting Started: Serving Web Content</title>
+</head>
+<body>
+<div align="center">
+    <h1>Search User By Contact Number</h1>
+    <form action="#" th:action="@{/searchUser}" method="get" th:object="${user}">
+        <label>Contact Number:</label>
+        <input type="text" th:field="*{contactNo}" />
+        <button type="submit">Search</button>
+    </form>
+</div>
+</body>
+</html>
