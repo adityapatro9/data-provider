@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import com.aditya.dataprovider.model.Tutorial;
 import com.aditya.dataprovider.model.User;
 import com.aditya.dataprovider.repository.UserRepository;
 

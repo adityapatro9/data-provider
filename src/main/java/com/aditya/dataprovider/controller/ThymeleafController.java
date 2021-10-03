@@ -1,9 +1,10 @@
 package com.aditya.dataprovider.controller;
 
-import com.aditya.dataprovider.model.Tutorial;
-import com.aditya.dataprovider.model.User;
-import com.aditya.dataprovider.service.TutorialService;
-import com.aditya.dataprovider.service.UserService;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.aditya.dataprovider.model.Tutorial;
+import com.aditya.dataprovider.model.User;
+import com.aditya.dataprovider.service.MailService;
+import com.aditya.dataprovider.service.TutorialService;
+import com.aditya.dataprovider.service.UserService;
 
 @Controller
 public class ThymeleafController {
@@ -24,6 +28,9 @@ public class ThymeleafController {
 	
 	@Autowired
 	TutorialService tutorialService;
+	
+	@Autowired
+	MailService mailService;
 	
 	@Value("${user.fname}")
 	private String userName;
@@ -45,11 +52,17 @@ public class ThymeleafController {
 	}
 	
 	@GetMapping("/allUsers")
-	public String showAllUsers(Model model) {
+	public String showAllUsers(Model model) throws MessagingException {
 		List<User> users = new ArrayList<>();
 		users = userService.getAllRawUsers(null);
 		model.addAttribute("users", users);
 		logger.info("Entered all users!!!");
+		// To be moved -- start
+		mailService.sendPlainTextEmail();
+		mailService.sendHTMLEmail();
+		mailService.sendHTMLEmailWithAttachment();
+		mailService.sendHTMLEmailWithInlineImage();
+		// To be moved -- end
 		return "allUsers";
 	}
 	
