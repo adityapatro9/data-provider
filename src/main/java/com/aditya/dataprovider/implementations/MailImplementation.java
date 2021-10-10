@@ -11,9 +11,11 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
 import com.aditya.dataprovider.interfaces.Mail;
 
+@Component
 public class MailImplementation implements Mail {
 
 	@Autowired

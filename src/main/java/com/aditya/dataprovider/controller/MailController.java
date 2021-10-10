@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,15 +23,27 @@ public class MailController {
 	@Autowired
 	MailService mailService;
 
-	@GetMapping("/sendPlainTextEmail")
+	@PostMapping("/sendPlainTextEmail")
 	public ResponseEntity<String> sendPlainTextEmail(@RequestBody Mail mail) {
 		mailService.sendPlainTextEmail(mail);
 		return new ResponseEntity<>("Mail Sent to "+ mail.getTo(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/sendHTMLEmailWithInlineImage")
+	@PostMapping("/sendHTMLEmailWithInlineImage")
 	public ResponseEntity<String> sendHTMLEmailWithInlineImage(@RequestBody Mail mail) throws MessagingException {
 		mailService.sendHTMLEmailWithInlineImage(mail);
 		return new ResponseEntity<>("Mail Sent to "+ mail.getTo(),HttpStatus.OK);
 	}
+	
+//	@PostMapping("/sendHTMLEmail")
+//	public ResponseEntity<String> sendHTMLEmail(@RequestBody Mail mail) throws MessagingException {
+//		mailService.sendHTMLEmail(mail);
+//		return new ResponseEntity<>("Mail Sent to "+ mail.getTo(),HttpStatus.OK);
+//	}
+//	
+//	@PostMapping("/sendHTMLEmailWithAttachment")
+//	public ResponseEntity<String> sendHTMLEmailWithAttachment(@RequestBody Mail mail) throws MessagingException {
+//		mailService.sendHTMLEmailWithAttachment(mail);
+//		return new ResponseEntity<>("Mail Sent to "+ mail.getTo(),HttpStatus.OK);
+//	}
 }
