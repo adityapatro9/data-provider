@@ -1,14 +1,8 @@
 package com.aditya.dataprovider.service;
 
-import java.io.File;
-
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import com.aditya.dataprovider.implementations.MailImplementation;
@@ -24,12 +18,12 @@ public class MailService {
 		mailImplementation.sendPlainTextEmail(mail);
 	}
 
-	public void sendHTMLEmail() throws MessagingException {
-		mailImplementation.sendHTMLEmail();
+	public void sendHTMLEmail(Mail mail) throws MessagingException {
+		mailImplementation.sendHTMLEmail(mail);
 	}
 
-	public void sendHTMLEmailWithAttachment() throws MessagingException {
-		mailImplementation.sendHTMLEmailWithAttachment();
+	public void sendHTMLEmailWithAttachment(Mail mail) throws MessagingException {
+		mailImplementation.sendHTMLEmailWithAttachment(mail);
 	}
 
 	public void sendHTMLEmailWithInlineImage(Mail mail) throws MessagingException {

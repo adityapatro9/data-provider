@@ -41,18 +41,18 @@ public class MailImplementation implements Mail {
 	}
 
 	@Override
-	public void sendHTMLEmail() throws MessagingException {
+	public void sendHTMLEmail(com.aditya.dataprovider.model.Mail mail) throws MessagingException {
 
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 
-		helper.setSubject("Ongoing Update");
-		helper.setFrom(from);
-		helper.setTo(to);
+		helper.setSubject(mail.getSubject());
+		helper.setFrom(mail.getFrom());
+		helper.setTo(mail.getTo());
 
 		boolean html = true;
 		helper.setText(
-				"<b>Hey Reader,</b>,<br><i>Spring Batch work in progress. Taking time to understand and implement.</i>",
+				"<b>Hey Reader,</b>,<br><i>"+ mail.getSubject() +".</i>",
 				html);
 
 		mailSender.send(message);
@@ -60,17 +60,17 @@ public class MailImplementation implements Mail {
 	}
 
 	@Override
-	public void sendHTMLEmailWithAttachment() throws MessagingException {
+	public void sendHTMLEmailWithAttachment(com.aditya.dataprovider.model.Mail mail) throws MessagingException {
 
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-		helper.setSubject("Anime/Manga Map Japan");
-		helper.setFrom(from);
-		helper.setTo(to);
+		helper.setSubject(mail.getSubject());
+		helper.setFrom(mail.getFrom());
+		helper.setTo(mail.getTo());
 
 		helper.setText(
-				"<b>Dear friend,</b>,<br><i>Please find stores and map for anime and manga shopping attached.</i>",
+				"<b>Dear friend,</b>,<br><i>"+mail.getBody()+"</i>",
 				true);
 
 		FileSystemResource file = new FileSystemResource(new File("D:\\resources\\anim_en.pdf"));
@@ -90,8 +90,7 @@ public class MailImplementation implements Mail {
 		helper.setFrom(from);
 		helper.setTo(mail.getTo());
 
-		String content = "<b>Dear friend</b>,<br><i>I am recently watching a cool Anime," + " Fairy Tail" + ".</i>"
-				+ "<br><i>What are you watching this friday???</i>"
+		String content = "<b>Dear friend</b>,<br><i>"+mail.getBody()+"</i>"
 				+ "<br><img src='cid:image001'/><br><b>Best Regards</b><br><i>Java Mail</i>";
 		helper.setText(content, true);
 
