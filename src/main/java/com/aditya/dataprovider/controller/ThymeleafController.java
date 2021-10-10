@@ -57,12 +57,6 @@ public class ThymeleafController {
 		users = userService.getAllRawUsers(null);
 		model.addAttribute("users", users);
 		logger.info("Entered all users!!!");
-		// To be moved -- start
-		mailService.sendPlainTextEmail();
-		mailService.sendHTMLEmail();
-		mailService.sendHTMLEmailWithAttachment();
-		mailService.sendHTMLEmailWithInlineImage();
-		// To be moved -- end
 		return "allUsers";
 	}
 	
