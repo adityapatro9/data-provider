@@ -22,7 +22,7 @@ public class UserAuthController {
 
     @GetMapping("getUserById/{id}")
     public ResponseEntity<UserAuth> getUserById(@PathVariable("id") Long id) {
-        UserAuth userAuth = this.userAuthService.getUserById(id);
+        UserAuth userAuth = userAuthService.getUserById(id);
         if (!ObjectUtils.isEmpty(userAuth))
             return new ResponseEntity<>(userAuth,HttpStatus.OK);
         else
@@ -31,7 +31,7 @@ public class UserAuthController {
 
     @GetMapping("getUserByContactNo/{contactNo}")
     public ResponseEntity<UserAuth> getUserByContactNo(@PathVariable("contactNo") String contactNo) {
-        UserAuth userAuth = this.userAuthService.getUserByContactNo(contactNo);
+        UserAuth userAuth = userAuthService.getUserByContactNo(contactNo);
         if (!ObjectUtils.isEmpty(userAuth))
             return new ResponseEntity<>(userAuth,HttpStatus.OK);
         else
@@ -40,7 +40,7 @@ public class UserAuthController {
 
     @GetMapping("getUserByEmailId/{emailId}")
     public ResponseEntity<UserAuth> getUserByEmailId(@PathVariable("emailId") String emailId) {
-        UserAuth userAuth = this.userAuthService.getUserByEmailId(emailId);
+        UserAuth userAuth = userAuthService.getUserByEmailId(emailId);
         if (!ObjectUtils.isEmpty(userAuth))
             return new ResponseEntity<>(userAuth,HttpStatus.OK);
         else

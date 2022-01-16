@@ -11,14 +11,14 @@ public class UserAuthService {
     UserAuthRepository userAuthRepository;
 
     public UserAuth getUserById(Long userId) {
-        return this.userAuthRepository.findByUserId(userId);
+        return userAuthRepository.findByUserId(userId);
     }
 
     public UserAuth getUserByContactNo(String contactNo){
-        return this.userAuthRepository.findByContactNumber(contactNo);
+        return userAuthRepository.findByContactNumber(contactNo);
     }
 
     public UserAuth getUserByEmailId(String emailId){
-        return this.userAuthRepository.findByEmailId(emailId);
+        return userAuthRepository.findByEmailId(emailId);
     }
 }
